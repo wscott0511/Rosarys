@@ -35,24 +35,24 @@ class JoyfulViewController: UIViewController {
         prayerLabel.text = PrayerArray.ThePrayers.prayers[prayerNumber].prayer
     }
     
+    // This is supposed to repeat and continue on to the next mystery until it gets to joyfulNum = 4
+    // At joyfulNum = 4 it goes through the prayers once more and then segues to the next view controller
     @IBAction func nextButton(_ sender: UIButton) {
-        repeat {
-            if joyfulNum + 1 != 5 {
-                if joyfulNum + 1 < 5 && prayerNumber + 1 < PrayerArray.ThePrayers.prayers.count  {
-                    if prayerNumber + 1 < PrayerArray.ThePrayers.prayers.count {
-                        prayerNumber += 1
-                        hideMysteryUI()
-                        updatePrayerUI()
-                    } else if joyfulNum + 1 < PrayerArray.Joyful.joyful.count {
-                        joyfulNum += 1
-                        hidePrayerUI()
-                        updateMysteryUI()
-                    }
+        if joyfulNum + 1 != 5 {
+            if joyfulNum + 1 < 5 && prayerNumber + 1 < PrayerArray.ThePrayers.prayers.count  {
+                if prayerNumber + 1 < PrayerArray.ThePrayers.prayers.count {
+                    prayerNumber += 1
+                    hideMysteryUI()
+                    updatePrayerUI()
+                } else if joyfulNum + 1 < PrayerArray.Joyful.joyful.count {
+                    joyfulNum += 1
+                    hidePrayerUI()
+                    updateMysteryUI()
                 }
-            } else {
-                performSegue(withIdentifier: K.jToE, sender: sender)
             }
-        } while joyfulNum + 1 != 5
+        } else {
+            performSegue(withIdentifier: K.jToE, sender: sender)
+        }
     }
     
     func updateMysteryUI() {
